@@ -1,7 +1,7 @@
 import {
-  createAgent,
   createSession,
   resumeSession,
+  resumeConversation,
   type Session as LettaSession,
   type SDKMessage,
   type CanUseToolResponse,
@@ -94,14 +94,13 @@ export async function runLetta(options: RunnerOptions): Promise<RunnerHandle> {
 
       if (resumeConversationId) {
         // Resume specific conversation
-        lettaSession = resumeSession(resumeConversationId, sessionOptions);
+        lettaSession = resumeConversation(resumeConversationId, sessionOptions);
       } else if (cachedAgentId) {
         // Create new conversation on existing agent
-        lettaSession = createSession(cachedAgentId, sessionOptions);
+        lettaSession = resumeSession(cachedAgentId, sessionOptions);
       } else {
-        // First time - create agent, then create conversation
-        cachedAgentId = await createAgent();
-        lettaSession = createSession(cachedAgentId, sessionOptions);
+        // First time - create fresh session (creates agent automatically)
+        lettaSession = createSession(sessionOptions);
       }
 
       // Store for abort handling

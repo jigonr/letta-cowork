@@ -18,9 +18,9 @@ type EventPayloadMapping = {
     "generate-session-title": string;
     "get-recent-cwds": string[];
     "select-directory": string | null;
-    "get-api-config": { apiKey: string; baseURL: string; model: string; apiType?: "anthropic" } | null;
+    "get-api-config": { apiKey: string; baseURL: string; model: string; apiType?: "letta" } | null;
     "save-api-config": { success: boolean; error?: string };
-    "check-api-config": { hasConfig: boolean; config: { apiKey: string; baseURL: string; model: string; apiType?: "anthropic" } | null };
+    "check-api-config": { hasConfig: boolean; config: { apiKey: string; baseURL: string; model: string; apiType?: "letta" } | null };
 }
 
 interface Window {
@@ -32,8 +32,8 @@ interface Window {
         onServerEvent: (callback: (event: any) => void) => UnsubscribeFunction;
         getRecentCwds: (limit?: number) => Promise<string[]>;
         selectDirectory: () => Promise<string | null>;
-        getApiConfig: () => Promise<{ apiKey: string; baseURL: string; model: string; apiType?: "anthropic" } | null>;
-        saveApiConfig: (config: { apiKey: string; baseURL: string; model: string; apiType?: "anthropic" }) => Promise<{ success: boolean; error?: string }>;
-        checkApiConfig: () => Promise<{ hasConfig: boolean; config: { apiKey: string; baseURL: string; model: string; apiType?: "anthropic" } | null }>;
+        getApiConfig: () => Promise<{ apiKey: string; baseURL: string; model: string; apiType?: "letta" } | null>;
+        saveApiConfig: (config: { apiKey: string; baseURL: string; model: string; apiType?: "letta" }) => Promise<{ success: boolean; error?: string }>;
+        checkApiConfig: () => Promise<{ hasConfig: boolean; config: { apiKey: string; baseURL: string; model: string; apiType?: "letta" } | null }>;
     }
 }
